@@ -1,3 +1,4 @@
 com\company\project\entities\User.class
+com\company\project\dto\VehicleMakeRequest.class
 com\company\project\services\UserService.class
 com\company\project\repositories\UserRepository.class

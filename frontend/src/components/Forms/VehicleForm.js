@@ -1,27 +1,16 @@
 import React,{useState,useEffect} from "react";
 
 
-const VehicleForm= ({apiInstance1,apiInstance2,setUpdate}) =>{
+const VehicleForm= ({apiInstance1,apiInstance2,setUpdate,chosenmake}) =>{
     const [vehicle_name,setVehicle_name] = useState('');
     const [vehicle_autonomy,setVehicle_autonomy] = useState('');
     const [vehicle_image,setVehicle_image] = useState(null);
-    const [vehicle_Make,setVehicle_Make] = useState('');
-    const [makedata,setMakedata] = useState([]);
-
-    useEffect(()=>{
-        apiInstance1.get('makes')
-        .then((response) => {
-            setMakedata(response);  
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-    });
 
     const handleSubmit =(event) =>{
         event.preventDefault();
+        console.log(vehicle_image);
         handleCarUpload();
-        handleImageUpload(event);
+        handleImageUpload();
         setUpdate(1);
     };
     const handleCarUpload = () =>{
@@ -29,33 +18,28 @@ const VehicleForm= ({apiInstance1,apiInstance2,setUpdate}) =>{
         const vehicle = {
             vehicle_name:vehicle_name,
             vehicle_autonomy:parseInt(vehicle_autonomy),
-            vehicle_image:vehicle_image,
-            vehicle_make:{}
+            vehicle_image:vehicle_name.toLowerCase(),
+            vehicle_make:parseInt(chosenmake)
         };
-        const mockvehicle ={
-            vehicle: vehicle,
-            make_id: parseInt(vehicle_Make)
-        }
-        console.log(mockvehicle)
-        apiInstance1.post(`vehicles/addvehicle`,mockvehicle)
+        console.log(vehicle)
+        apiInstance1.post(`vehicles/addvehicle`,vehicle)
             .then((response) => {
                 console.log(response);
                 
             })
             .catch((error) => {
                 console.error(error);
+                console.log("Vehicle object" + vehicle);
             });  
     }
 
-    const handleImageUpload = (event) => {
-        const file = event.target.files[0];
-      
-        if (file) {
+    const handleImageUpload = () => {
+        if (vehicle_image) {
           // Rename the image based on the vehicle_name
           const lowercaseName = vehicle_name.toLowerCase();
       
           // Send the file directly via Axios
-          apiInstance2.post(`uploadImage/${lowercaseName}`, file).then((response) => {
+          apiInstance2.post(`uploadImage/${lowercaseName}`, vehicle_image).then((response) => {
             console.log('Image uploaded successfully:', response.data);
             // Handle the response as needed
           });
@@ -94,16 +78,10 @@ return(
           class ='form-control'
           placeholder='Seleccione una imagen para el vehículo'
           required
-          onChange={(event) => setVehicle_image(event.target.value)}
+          onChange={(event) => setVehicle_image(event.target.files[0])}
         ></input>
         </div>
-        <label htmlFor="vehicleMake">Vehicle Make:</label>
-      <select id="makes" onChange={(event) => setVehicle_Make(event.target.value)}>
-          {makedata.map((make) => (
-              <option key={make.id} value={make.id}>{make.make_name}</option>
-          ))}
-      </select>
-        <button type='submit' class= 'btn btn-primary'>Login</button>
+        <button type='submit' class= 'btn btn-primary'>Save Vehicle</button>
       </form>
 );
 }

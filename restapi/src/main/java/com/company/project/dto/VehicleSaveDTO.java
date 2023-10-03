@@ -1,62 +1,54 @@
 package com.company.project.dto;
 
+import javax.persistence.*;
 
-import com.company.project.entities.Vehicle;
 
-import java.util.Objects;
 
 public class VehicleSaveDTO {
-    private Vehicle vehicle;
-    private Integer vehicle_make;
 
-    // No-arguments constructor
-    public VehicleSaveDTO() {
+    private String vehicle_name;
+
+
+
+    private Integer vehicle_autonomy;
+
+
+    private String vehicle_image;
+
+
+    //Foreign Key relationship declaration
+    private Integer vehiclemake;
+    //Setters and getters
+
+    public void setVehicle_name(String vehicle_name) {
+        this.vehicle_name = vehicle_name;
     }
 
-    // Constructor with Model parameter
-    public VehicleSaveDTO(Vehicle vehicle) {
-        this.vehicle = vehicle;
+    public String getVehicle_name() {
+        return vehicle_name;
     }
 
-    // Getter for 'model' field
-    public Vehicle getVehicle() {
-        return vehicle;
+    public void setVehicle_autonomy(Integer vehicle_autonomy) {
+        this.vehicle_autonomy = vehicle_autonomy;
     }
 
-    public Integer getVehicle_make() {
-        return vehicle_make;
-    }
-
-
-
-    // Setter for 'model' field
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
+    public Integer getVehicle_autonomy() {
+        return vehicle_autonomy;
     }
 
     public void setVehicle_make(Integer vehicle_make) {
-        this.vehicle_make = vehicle_make;
+        this.vehiclemake = vehicle_make;
     }
 
-    // toString() method
-    @Override
-    public String toString() {
-        return "VehicleSaveDTO{" +
-                "vehicle=" + vehicle +
-                '}';
+    public Integer getVehicle_make() {
+        return vehiclemake;
     }
 
-    // equals() and hashCode() methods
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        VehicleSaveDTO that = (VehicleSaveDTO) o;
-        return Objects.equals(vehicle, that.vehicle);
+    public void setVehicle_image(String vehicle_image) {
+        this.vehicle_image = vehicle_image;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(vehicle);
+    public String getVehicle_image() {
+        return vehicle_image;
     }
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Cookies from 'universal-cookie';
 import MakeList from './listViews/MakeList';
-import VehicleList from "./listViews/VehicleListFilter";
+import VehicleListFilter from "./listViews/VehicleListFilter";
 import axios from 'axios';
 
 
@@ -39,7 +39,7 @@ const Adminpanel =()=> {
     }else{
       setIsLogged(0);
     }
-  },[isLogged]);
+  },[jwtToken]);
 
   const submitLogin = async (event) => {
 
@@ -109,7 +109,7 @@ const Adminpanel =()=> {
 
           ):(
             <>
-            <VehicleList apiInstance1={apiInstance1} apiInstance2={apiInstance2} />
+            <VehicleListFilter apiInstance1={apiInstance1} apiInstance2={apiInstance2} />
             </>
           )}
           </>

@@ -21,17 +21,18 @@ public class VehicleService{
     com.company.project.repositories.MakeRepository MakeRepository;
 
 
-    public Vehicle saveVehicle(VehicleSaveDTO mockvehicle){
+    public void saveVehicle(VehicleSaveDTO tempvehicle){
         var vehicle = new Vehicle();
-        vehicle.setVehicle_name(mockvehicle.getVehicle().getVehicle_name());
-        vehicle.setVehicle_autonomy(mockvehicle.getVehicle().getVehicle_autonomy());
-        vehicle.setVehicle_image(mockvehicle.getVehicle().getVehicle_image());
-        vehicle.setVehicle_make(MakeRepository.findBymakeid(mockvehicle.getVehicle_make()));
-        return VehicleRepository.save(vehicle);
+        vehicle.setVehicle_name(tempvehicle.getVehicle_name());
+        vehicle.setVehicle_autonomy(tempvehicle.getVehicle_autonomy());
+        vehicle.setVehicle_image(tempvehicle.getVehicle_image());
+        vehicle.setVehicle_make(MakeRepository.findBymakeid(tempvehicle.getVehicle_make()));
+        VehicleRepository.save(vehicle);
     }
 
     public List<Vehicle> getVehicleByMakeId(Integer vehicle_make){
-        return VehicleRepository.getVehiclesByMakeId(vehicle_make);
+
+        return VehicleRepository.findByvehiclemake(MakeRepository.findBymakeid(vehicle_make));
     }
 
 

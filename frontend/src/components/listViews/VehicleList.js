@@ -14,7 +14,8 @@ const VehicleList = ({apiInstance1,apiInstance2,chosenmake}) =>{
                 
             })
             .catch((error) => {
-                console.log(requestData)
+                console.log(requestData);
+                console.log(chosenmake);
                 console.error(error);
             });
             setFormState(0);
@@ -45,7 +46,7 @@ const VehicleList = ({apiInstance1,apiInstance2,chosenmake}) =>{
           <button onClick={() =>setFormState(1)}>+</button>
           {formstate == 1 ?(
             <>
-         {<VehicleForm apiInstance1={apiInstance1} apiInstance2={apiInstance2} setUpdate={setUpdate} />}
+         {<VehicleForm chosenmake={chosenmake} apiInstance1={apiInstance1} apiInstance2={apiInstance2} setUpdate={setUpdate} />}
           </>
           ):(
             <></>

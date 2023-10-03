@@ -9,7 +9,7 @@ public class Vehicle {
     //All field declaration for ORM
     @Id
     @Column(name = "vehicle_id")
-    private int vehicle_id;
+    private int vehicleid;
 
     @Basic
     @Column(name = "vehicle_name")
@@ -28,11 +28,11 @@ public class Vehicle {
     //Foreign Key relationship declaration
     @ManyToOne(targetEntity = Make.class)
     @JoinColumn(name = "vehicle_make", referencedColumnName = "make_id")
-    private Make vehicle_make;
+    private Make vehiclemake;
     //Setters and getters
-    public int getId(){ return vehicle_id;}
+    public int getId(){ return vehicleid;}
 
-    public void setId(int id){this.vehicle_id = id;}
+    public void setId(int id){this.vehicleid = id;}
 
     public void setVehicle_name(String vehicle_name) {
         this.vehicle_name = vehicle_name;
@@ -51,11 +51,11 @@ public class Vehicle {
     }
 
     public void setVehicle_make(Make vehicle_make) {
-        this.vehicle_make = vehicle_make;
+        this.vehiclemake = vehicle_make;
     }
 
     public Make getVehicle_make() {
-        return vehicle_make;
+        return vehiclemake;
     }
 
     public void setVehicle_image(String vehicle_image) {

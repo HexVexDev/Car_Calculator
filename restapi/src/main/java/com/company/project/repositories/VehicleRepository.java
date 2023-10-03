@@ -1,5 +1,6 @@
 package com.company.project.repositories;
 
+import com.company.project.entities.Make;
 import com.company.project.entities.Vehicle;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,12 +13,11 @@ import java.util.List;
 public interface VehicleRepository extends JpaRepository<Vehicle,Integer> {
 
 
-    @Query("SELECT v FROM Vehicle v WHERE v.vehicle_id =?1")
+    @Query("SELECT v FROM Vehicle v WHERE v.vehicleid =?1")
     Vehicle getVehicleById(Integer vehicleid);
-    @Query("SELECT v FROM Vehicle v WHERE v.vehicle_make =?1")
-    List<Vehicle> getVehiclesByMakeId(Integer vehicle_make);
+    List<Vehicle> findByvehiclemake(Make vehicle_make);
     @Modifying
-    @Query("DELETE FROM Vehicle v WHERE v.vehicle_id =?1")
+    @Query("DELETE FROM Vehicle v WHERE v.vehicleid =?1")
     void deleteVehicleById(Integer vehicleid);
 
 
