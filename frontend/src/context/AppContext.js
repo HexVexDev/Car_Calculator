@@ -16,7 +16,7 @@ export const AppProvider = (props) => {
   const [state, setState] = useState(initialState);
 
   const updateContext = (newState) => {
-   console.log("Context updated: " +newState);
+   console.log("Context updated: " + newState.selectaut);
     setState({ ...state, ...newState });
 
   };

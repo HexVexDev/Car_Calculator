@@ -19,7 +19,7 @@ public class VehicleController {
     @Autowired
     VehicleService service;
 
-    @GetMapping()
+    @PostMapping()
     public List<Vehicle> getVehicleByMakeId(@RequestBody VehicleMakeRequest request) {
         Integer vehicle_make = request.getVehicle_make();
         return this.service.getVehicleByMakeId(vehicle_make);
