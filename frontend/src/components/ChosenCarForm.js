@@ -34,6 +34,7 @@ const ChosenCarForm = ({ updateContext }) => {
       axios.post('http://localhost:8080/vehicles', vehicle_make)
         .then((response) => {
           setVehicleData(response.data);
+          console.log("chosenmake changed "+chosenmake);
         })
         .catch((error) => {
           console.error(error);
@@ -43,10 +44,11 @@ const ChosenCarForm = ({ updateContext }) => {
 
   // Fetch vehicle image and update context when chosenvehicle changes
   useEffect(() => {
-    console.log(chosenvehicle);
-    let chosenvehobject = vehicledata[chosenvehicle];
+    console.log("chosenvehicle change: "+chosenvehicle);
+    console.log("vehicledata: "+vehicledata)
+    let chosenvehobject = vehicledata[chosenvehicle-1];
     if (chosenvehicle>0) {
-      setVehicleImage('http://localhost:9090/images/'+chosenvehobject.vehicle_image);
+      setVehicleImage(`http://localhost:9090/images/${chosenvehobject.vehicle_image}`);
       handleChange('selectaut', chosenvehobject.vehicle_autonomy);
     }
   }, [chosenvehicle]);
@@ -75,7 +77,7 @@ const ChosenCarForm = ({ updateContext }) => {
   setChosenVehicle(event.target.value);
   console.log('After setChosenVehicle:', event.target.value);}}>
               {vehicledata.map((vehicle) => (
-                <option key={vehicle.vehicle_id} value={vehicle.vehicle_id}>
+                <option key={vehicle.vehicleid} value={vehicle.vehicleid}>
                   {vehicle.vehicle_name}({vehicle.vehicle_autonomy}km/l)
                 </option>
               ))}

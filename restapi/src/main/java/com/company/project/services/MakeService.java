@@ -21,6 +21,6 @@ public class MakeService {
         return MakeRepository.save(make);
     }
 
-   public Make getMakebyId(Integer make_id){return MakeRepository.findBymakeid(make_id);}
+   public Make getMakebyId(Integer make_id){return MakeRepository.getMakewithId(make_id);}
 
 }

@@ -1,6 +1,7 @@
 package com.company.project.controllers;
 
 import com.company.project.dto.VehicleMakeRequest;
+import com.company.project.dto.VehicleNoMakeRetrieve;
 import com.company.project.dto.VehicleSaveDTO;
 import com.company.project.entities.Vehicle;
 import com.company.project.services.VehicleService;
@@ -20,9 +21,9 @@ public class VehicleController {
     VehicleService service;
 
     @PostMapping()
-    public List<Vehicle> getVehicleByMakeId(@RequestBody VehicleMakeRequest request) {
+    public List<VehicleNoMakeRetrieve> getVehicleByMakeId(@RequestBody VehicleMakeRequest request) {
         Integer vehicle_make = request.getVehicle_make();
-        return this.service.getVehicleByMakeId(vehicle_make);
+        return this.service.getVehicleInfoByMake(vehicle_make);
     }
 
     @PostMapping("/addvehicle")

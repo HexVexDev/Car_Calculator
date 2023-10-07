@@ -8,7 +8,7 @@ const VehicleList = ({apiInstance1,apiInstance2,chosenmake}) =>{
     const [formstate,setFormState] = useState(0);
     const requestData = { vehicle_make: parseInt(chosenmake) };
     useEffect(()=>{
-        apiInstance1.get('vehicles',requestData)
+        apiInstance1.post('vehicles',requestData)
             .then((response) => {
                 setVehicle_data(response.data);
                 
@@ -31,13 +31,12 @@ const VehicleList = ({apiInstance1,apiInstance2,chosenmake}) =>{
       <th scope="col">Vehicle ID</th>
       <th scope="col">Vehicle Name</th>
       <th scope="col">Vehicle Autonomy</th>
-      <th scope="col">Vehicle Make</th>
     </tr>
   </thead>
     <tbody>
     {vehicle_data.map((dat) => (
-        <VehicleItem id={dat.id} key={dat.id} vehicle_name={dat.vehicle_name}
-         vehicle_autonomy={dat.vehicle_price} make_name={dat.vehicle_make?.make_name} />
+        <VehicleItem id={dat.vehicleid} key={dat.vehicleid} vehicle_name={dat.vehicle_name}
+         vehicle_autonomy={dat.vehicle_autonomy} />
     ))}
     </tbody>
 </table>

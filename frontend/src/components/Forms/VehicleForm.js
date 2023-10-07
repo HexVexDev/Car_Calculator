@@ -9,16 +9,18 @@ const VehicleForm= ({apiInstance1,apiInstance2,setUpdate,chosenmake}) =>{
     const handleSubmit =(event) =>{
         event.preventDefault();
         console.log(vehicle_image);
-        handleCarUpload();
-        handleImageUpload();
+        const lowercaseName = vehicle_name.toLowerCase();
+        const formattedName = lowercaseName.replace(/ /g,'-');
+        handleCarUpload(formattedName);
+        handleImageUpload(formattedName);
         setUpdate(1);
     };
-    const handleCarUpload = () =>{
+    const handleCarUpload = (formattedName) =>{
         
         const vehicle = {
             vehicle_name:vehicle_name,
             vehicle_autonomy:parseInt(vehicle_autonomy),
-            vehicle_image:vehicle_name.toLowerCase(),
+            vehicle_image:formattedName,
             vehicle_make:parseInt(chosenmake)
         };
         console.log(vehicle)
@@ -33,13 +35,10 @@ const VehicleForm= ({apiInstance1,apiInstance2,setUpdate,chosenmake}) =>{
             });  
     }
 
-    const handleImageUpload = () => {
+    const handleImageUpload = (formattedName) => {
         if (vehicle_image) {
-          // Rename the image based on the vehicle_name
-          const lowercaseName = vehicle_name.toLowerCase();
-      
           // Send the file directly via Axios
-          apiInstance2.post(`uploadImage/${lowercaseName}`, vehicle_image).then((response) => {
+          apiInstance2.post(`uploadImage/${formattedName}`,vehicle_image).then((response) => {
             console.log('Image uploaded successfully:', response.data);
             // Handle the response as needed
           });
