@@ -23,14 +23,27 @@ export const AppProvider = (props) => {
 
   const calculateValues =() =>{
     let today = new Date();
+    console.log("todays date "+today);
     let dateacq = new Date(state.date)
+    console.log("dateacq "+dateacq);
     let time_diff = Math.abs(today-dateacq)/(7*24*60*60*1000);
+    console.log("time gap "+time_diff);
     let formattedt = Math.floor(time_diff);
+    console.log("formattedt "+formattedt);
     let mpweek = state.cmileage/formattedt;
-    let milecost = mpweek/state.weeklycost;
-     state.calcaut = milecost/state.gastype;
+    console.log("cmileage "+state.cmileage)
+    console.log("mpweek "+mpweek);
+    let litperweek = state.weeklycost/state.gastype;
+    console.log("litperweek "+litperweek);
+    console.log("weeeklycost "+ state.weeklycost);
+   state.calcaut = mpweek/litperweek;
+     console.log("gas type " +state.gastype);
+     console.log("calcaut " +state.calcaut);
     let selectedweekcost = (mpweek/state.selectaut)*state.gastype;
+    console.log("select aut "+ state.selectaut);
+    console.log("selectedweekcost "+selectedweekcost);
     state.saved = state.weeklycost-selectedweekcost;
+    console.log("saved "+state.saved);
     const newState = {
       ...state
     };
